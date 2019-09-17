@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Explore non-coding RNA using Rfam, RNAcentral and Galaxy workflows! - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @charset "UTF-8";@import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.markdown-body{font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{font-size:16px;padding:0 1em;color:#777;border-left:.25em solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0 none}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg{max-width:100%;height:100%}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:760px;margin:25px auto -25px;padding:0 15px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:998}.ui-toc-label{opacity:.3;background-color:#ccc;border:none;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child > ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:cover}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-published-note{color:#337ab7}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="false" style="position: relative;"><h1 id="Explore-non-coding-RNA-using-Rfam-RNAcentral-and-Galaxy-workflows"><a class="anchor hidden-xs" href="#Explore-non-coding-RNA-using-Rfam-RNAcentral-and-Galaxy-workflows" title="Explore-non-coding-RNA-using-Rfam-RNAcentral-and-Galaxy-workflows"><span class="octicon octicon-link"></span></a>Explore non-coding RNA using Rfam, RNAcentral and Galaxy workflows!</h1><p>Dear explorer of non-coding RNA, <img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/Снимок%20экрана%202019-09-08%20в%2019.21.29.png"><br>
+This page will be your guide in your travel through the world of workflows.
+Please follow the detail instructions below and enjoy your results.<br>
+Sincerely,<br>
+Developers.</p><h1 id="tip1"><a class="anchor hidden-xs" href="#tip1" title="tip1"><span class="octicon octicon-link"></span></a></h1><p><strong>All that you need</strong> to complete this tutorial is <strong>the genome</strong> and <strong>RNA-seq data</strong>.</p><p>The workflows developed especially for annotation, processing and interpretation ncRNA in RNA-seq data using Rfam, RNAcentral and Galaxy.</p><p>Using these workflows you can:<br></p><ul>
+<li>Make alignment and pre-processing of RNA-seq data</li>
+<li>Create and modify the non-coding RNA annotation from Infernal and RNAcentral</li>
+<li>Count reads overlapping with annotation</li>
+<li>Make count normalization</li>
+<li>Hypothesis tests for differential expression analysis</li>
+<li>Visualize your data</li>
+<li>Get outputs for further work with tools or writing a script</li>
+</ul><h3 id="Notes-and-advice-"><a class="anchor hidden-xs" href="#Notes-and-advice-" title="Notes-and-advice-"><span class="octicon octicon-link"></span></a>Notes and advice <a target="_blank" rel="noopener"></a></h3><p>Please pay your attention to notes and bits of advice during description. In some tools default parameters could be not acceptable for your data. Also, don’t ignore dropdown lists (▶), usually there are some useful screen-shots.</p><h1 id="The-most-usefull-links-in-one-place-"><a class="anchor hidden-xs" href="#The-most-usefull-links-in-one-place-" title="The-most-usefull-links-in-one-place-"><span class="octicon octicon-link"></span></a>The most usefull links in one place: <a target="_blank" rel="noopener"></a></h1><ol>
+<li><a href="https://galaxyproject.org/tutorials/g101/" target="_blank" rel="noopener">Galaxy</a></li>
+<li><a href="https://drive.google.com/open?id=1wKhRFAkPGR0LLNR2jOH2dAHwql38kPLJ" target="_blank" rel="noopener">Tutorial from RNA Informatics Training day 2019 and data to complite this tutorial</a></li>
+<li><a href="https://rfam.readthedocs.io/en/latest/genome-annotation.html#example-of-using-infernal-and-rfam-to-annotate-rnas-in-an-archaeal-genome" target="_blank" rel="noopener">Rfam Help page</a></li>
+<li>Rfam Covarience models:<br>
+<a href="ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz" target="_blank" rel="noopener">ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz</a><br>
+<a href="ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin" target="_blank" rel="noopener">ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin</a><br></li>
+<li><a href="http://eddylab.org/infernal/" target="_blank" rel="noopener">Infernal</a></li>
+<li>Script for convert the formats</li>
+</ol><h1 id="Let’s-talk-about"><a class="anchor hidden-xs" href="#Let’s-talk-about" title="Let’s-talk-about"><span class="octicon octicon-link"></span></a>Let’s talk about:</h1><ol>
+<li><a href="#galaxy">What is Galaxy and workflow?</a>
+<ul>
+<li><a href="#wf">How to use workflows</a></li>
+<li><a href="#changes">How to change parameters in the workflow?</a></li>
+</ul>
+</li>
+<li><a href="#tools">What tools we used in advanced</a>
+<ul>
+<li><a href="#infernal_tool">Infernal</a></li>
+<li><a href="#formats">Format transformation</a></li>
+<li><a href="#gff_req">GFF format requirement</a></li>
+</ul>
+</li>
+<li><a href="#login">Login in galaxy and upload your data</a></li>
+<li><a href="#prepare_data">Prepare your data carefully</a>
+<ul>
+<li><a href="#fastq">If you have more than one fastq file per sample</a></li>
+<li><a href="#single-end">Single-end</a></li>
+<li><a href="#pair-end">Pair-end</a></li>
+</ul>
+</li>
+<li><a href="#wf-description">Description of workflows</a>
+<ul>
+<li><a href="#main">Main workflow</a>
+<ul>
+<li><a href="#ncrna_ann">ncRNA annotation</a></li>
+<li><a href="#ncrna_wf">ncRNA analysis</a></li>
+</ul>
+</li>
+<li><a href="#infernalwf">Infernal only</a></li>
+<li><a href="#rna-centralwf">RNAcentral only</a></li>
+<li><a href="#read_count">Read count only</a></li>
+</ul>
+</li>
+<li><a href="#check_list">Check list before run</a></li>
+<li><a href="#mistakes">Mistakes discussion</a><br></li>
+</ol><h2 id="What-is-Galaxy-and-workflow-"><a class="anchor hidden-xs" href="#What-is-Galaxy-and-workflow-" title="What-is-Galaxy-and-workflow-"><span class="octicon octicon-link"></span></a>What is Galaxy and workflow? <a target="_blank" rel="noopener"></a></h2><p>“<a href="https://galaxyproject.org/tutorials/g101/" target="_blank" rel="noopener">Galaxy</a> is a web-based scientific analysis platform used by tens of thousands of scientists across the world to analyze large biomedical datasets such as those found in genomics, proteomics, metabolomics and imaging.” <a href="https://academic.oup.com/nar/article/46/W1/W537/5001157" target="_blank" rel="noopener">(1)</a> It allows you to download data from different resources and use more spread and known tools on Galaxy server. What helps you work with big data especially if you don’t have your cluster. Unfortunately, Galaxy also isn’t all-powerful and some processes could take a long time and even be killed. (For example, Infernal on insect genome run more than one week and was killed by server.)</p><p>Workflow is one of the most powerful and useful features in the Galaxy. It allows you to combine all your steps in one scheme and run on new data automatically instead of repeat all steps manually.</p><h3 id="How-to-use-workflows-"><a class="anchor hidden-xs" href="#How-to-use-workflows-" title="How-to-use-workflows-"><span class="octicon octicon-link"></span></a>How to use workflows <a target="_blank" rel="noopener"></a></h3><p>The workflow contains 3 main components (Fig 1):</p><ol>
+<li>Input datasets</li>
+<li>Body (all tools which you will use)</li>
+<li>Outputs (every tool will give you output)</li>
+</ol><p>Fig 1. Example of simple workflow<br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/wf-parts.png" alt="Example of workflow"></p><p>Where should you take the workflow? It’s easy. First of all, you can create your own from zero or extract from your history in Galaxy.
+Secondly, you can import already existing workflow by link or download them from your computer.
+The process of running the workflow is also intuitional understandable and simple.</p><p>All these processes described in details with pictures in <a href="https://drive.google.com/open?id=1wKhRFAkPGR0LLNR2jOH2dAHwql38kPLJ" target="_blank" rel="noopener">presentation from RNA training day 2019 </a>. Although there are some exercises which help you better understand workflows structure and main components.</p><details><summary><b>Hint: If you go to workflow list and click on the checkbox "Show in tools panel", your workflow will appear at the buttom of tool list</b></summary><br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/checkbox.png"><br>
+</details><h3 id="How-to-change-parameters-in-the-workflow"><a class="anchor hidden-xs" href="#How-to-change-parameters-in-the-workflow" title="How-to-change-parameters-in-the-workflow"><span class="octicon octicon-link"></span></a>How to change parameters in the workflow?<a target="_blank" rel="noopener"></a></h3><p>When you use already constructed workflow you still can make some changes in parameters.</p><p>First of all, you should check all inputs!!!<br>
+Then if you want to make some changes in workflow, you can use dropdown lists or click on sign with a pencil. All other settings aren’t available for you.<br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/wf_change3.png" alt="wf_changes"></p><details><summary><b>Note: In most of our workflows we have <span style="color:red"><i>control</i></span> and <span style="color:red"><i>test</i></span> datasets which going through the same steps. If you change something in settings, please don't forget to change it for both datasets.</b></summary><br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/control_testt.png"><br>
+</details><h2 id="What-tools-we-used-in-advanced-"><a class="anchor hidden-xs" href="#What-tools-we-used-in-advanced-" title="What-tools-we-used-in-advanced-"><span class="octicon octicon-link"></span></a>What tools we used in advanced <a target="_blank" rel="noopener"></a></h2><p>For this step you need:</p><ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Reference genome</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Files with covariance models<br>   <a href="ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz" target="_blank" rel="noopener">ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz</a><br>
+<a href="ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin" target="_blank" rel="noopener">ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin</a></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label><a href="#formats">Script</a> for format convertation</li>
+</ul><h3 id="Infernal-"><a class="anchor hidden-xs" href="#Infernal-" title="Infernal-"><span class="octicon octicon-link"></span></a>Infernal <a target="_blank" rel="noopener"></a></h3><p>“<a href="http://eddylab.org/infernal/" target="_blank" rel="noopener">Infernal</a> builds probabilistic profiles of the sequence and secondary structure of an RNA family called covariance models (CMs) from structurally annotated multiple sequence alignments given as input. Infernal uses CMs to search for new family members in sequence databases and to create potentially large multiple sequence alignments.” <a href="https://www.ncbi.nlm.nih.gov/pubmed/24008419?dopt=Abstract" target="_blank" rel="noopener">(2)</a>
+In simple words, Infernal take sequence/multiple alignments and scan them using covariance models (CMs), find a match, estimate it and put in the table.<br>
+In our study we used as input the genome of organism and Rfam library of covariance models.</p><p><img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/infernal_intro.png" alt="infernal_intro"></p><p>The bash command:</p><pre><code>&gt;cmscan --nohmmonly --rfam --cut_ga --fmt 2 --oclan --oskip --clanin Rfam.clanin -o xxx.cmscan.out --tblout xxx.tblout Rfam.cm genome.fasta
+</code></pre><p>Where xxx - the name for your output; genome.fasta - genome of studying organism in fasta format. The more detail description about installation and running Infernal you can find on <a href="https://rfam.readthedocs.io/en/latest/genome-annotation.html#example-of-using-infernal-and-rfam-to-annotate-rnas-in-an-archaeal-genome" target="_blank" rel="noopener">Rfam Help</a> or on <a href="http://eddylab.org/infernal/" target="_blank" rel="noopener">Infernal website</a>.</p><p>If you don’t have claster, your genome is too big and computer can’t process it. You can look on <a href="ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/genome_browser_hub/" target="_blank" rel="noopener">Rfam FTP</a>, there are some Infernal results for several species in bigBED format and GFF <strong>(?)</strong> formats.</p><details><summary>list of species</summary><br><ul>
+<li>bos taurus<br></li>
+<li>canis familiaris<br></li>
+<li>equus caballus<br></li>
+<li>gallus gallus<br></li>
+<li>gorilla gorilla<br></li>
+<li>homo sapiens<br></li>
+<li>meleagris gallopavo<br></li>
+<li>mus musculus<br></li>
+<li>nomascus leucogenys<br></li>
+<li>oryctolagus cuniculus<br></li>
+<li>ovis aries<br></li>
+<li>pan troglodytes<br></li>
+<li>papio anubis<br></li>
+<li>sus scrofa<br></li>
+</ul></details><h3 id="Format-transformation-"><a class="anchor hidden-xs" href="#Format-transformation-" title="Format-transformation-"><span class="octicon octicon-link"></span></a>Format transformation <a target="_blank" rel="noopener"></a></h3><p>For further data processing we need transform our table out file into gff format. We created a script tblout_to_gff3.py (link) in this purpose.<br>
+The bash command:</p><pre><code>python tblout_to_gff3.py xxx.tblout &gt; xxx.gff3
+</code></pre><p>Where the first file is a python script, second is your table output from Infernal and xxx.gff3 - the file where you want to save your gff3 annotation. The information about GFF3 format you can find on <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format3" target="_blank" rel="noopener">UCSC website (GFF format)</a>.  <br></p><h3 id="GFF-format-requirement-"><a class="anchor hidden-xs" href="#GFF-format-requirement-" title="GFF-format-requirement-"><span class="octicon octicon-link"></span></a>GFF format requirement <a target="_blank" rel="noopener"></a></h3><p>For working with the workflows your gff3 file should follow some rules. They are necessary to read counting tool (<a href="http://dx.doi.org/10.1093/bioinformatics/btt656" target="_blank" rel="noopener">featureCount</a>) and processes in our workflows. First of all, in the third column (a type of feature) in all rows must be ‘rna’. Only rows which have the matched feature type in the provided annotation file will be included for reads counting. Second, 9th column (attributes) must contain ‘ID=’ in the first place. The ID will be used to group features.<br>
+Example of GFF3 file: <br></p><table>
+<thead>
+<tr>
+<th>seqname</th>
+<th>source</th>
+<th>feature</th>
+<th>start</th>
+<th>end</th>
+<th>score</th>
+<th>strand</th>
+<th>frame</th>
+<th>group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chr2R</td>
+<td>Infernal</td>
+<td>rna</td>
+<td>8048631</td>
+<td>8048808</td>
+<td>.</td>
+<td>-</td>
+<td>.</td>
+<td>ID=RF02668_PsiU2-55_8048631_8048808</td>
+</tr>
+<tr>
+<td>chr2R</td>
+<td>Infernal</td>
+<td>rna</td>
+<td>5968293</td>
+<td>5968429</td>
+<td>.</td>
+<td>-</td>
+<td>.</td>
+<td>ID=RF02670_scaDm46E3_5968293_5968429</td>
+</tr>
+<tr>
+<td>chr2R</td>
+<td>Infernal</td>
+<td>rna</td>
+<td>20063751</td>
+<td>20063890</td>
+<td>.</td>
+<td>+</td>
+<td>.</td>
+<td>ID=RF00291_snoR639_20063751_20063890</td>
+</tr>
+</tbody>
+</table><p>If you want to filter and group by other parameters you can make changes in the workflow on <strong><a href="#featurecount">this step</a></strong>.</p><h2 id="Login-in-galaxy-and-upload-your-data-"><a class="anchor hidden-xs" href="#Login-in-galaxy-and-upload-your-data-" title="Login-in-galaxy-and-upload-your-data-"><span class="octicon octicon-link"></span></a>Login in galaxy and upload your data <a target="_blank" rel="noopener"></a></h2><p>On this step you should:</p><ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Login or create a Galaxy account</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>If you are a new user, play a little bit with Galaxy and understand how it works.</li>
+</ul><p>There are 3 Galaxy servers on the Internet. These servers don’t connect. If you did something in one, it will NOT appear in another. Moreover, the installed tools also could differ.
+Our workflows build in <strong><a href="https://usegalaxy.org" target="_blank" rel="noopener">usegalaxy.org</a></strong> and we can’t promise you that they will work on other servers.</p><p>If you have never used Galaxy before, there is some simple <a href="https://galaxyproject.org/learn/" target="_blank" rel="noopener">tutorials and interactive courses</a> or you can watch our <a href="https://drive.google.com/open?id=1wKhRFAkPGR0LLNR2jOH2dAHwql38kPLJ" target="_blank" rel="noopener">presentation</a>, where you will find some main hints.</p><p>You can upload the data to Galaxy account by next ways:</p><details>
+<summary>From local computer/FTP file/by URL</summary>  
+In opened window you can choose format of files and assembly genome. <br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/from_computer.png">
+</details><details><summary>From databases</summary>
+Using Galaxy you can use the most spread databases for extracting your data (UCSC &amp; ENA SRA). <br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/from_database.png">
+</details><details><summary>From existing history by link</summary><br>
+You can share your history in Galaxy with other people. <br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/from_history2.png">
+</details><h2 id="Prepare-your-data-carefully-"><a class="anchor hidden-xs" href="#Prepare-your-data-carefully-" title="Prepare-your-data-carefully-"><span class="octicon octicon-link"></span></a>Prepare your data carefully <a target="_blank" rel="noopener"></a></h2><p>For next steps we need to prepare our data. You should remember some details about your data (strand-specificity and pair- or single-end)</p><h3 id="If-you-have-more-than-one-fastq-file-per-sample-"><a class="anchor hidden-xs" href="#If-you-have-more-than-one-fastq-file-per-sample-" title="If-you-have-more-than-one-fastq-file-per-sample-"><span class="octicon octicon-link"></span></a>If you have more than one fastq file per sample <a target="_blank" rel="noopener"></a></h3><p>If you have more than one FASTQ file per sample, you should combine them in one. In this purpose we will use ‘Collection operation’ -&gt; ‘Collapse collection’. This part of preparation also requiered for paired-end read dataset if you have more than one fastq file per forward/reverse reads. Combine them in two file (one file for forward and one for reverse) and follow instructions in <a href="#pair-end">Pair-end section</a><br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/merge_collection.png" alt="merge_collections"></p><h3 id="Single-end"><a class="anchor hidden-xs" href="#Single-end" title="Single-end"><span class="octicon octicon-link"></span></a>Single-end<a target="_blank" rel="noopener"></a></h3><details><summary>If your data is single-end, than it makes your life a little bit easier. All what you need to do is, combine replicase in dataset list.</summary><br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/dataset_collection.png"><br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/dataset_collection2.png">
+</details><h3 id="Pair-end-in-developing"><a class="anchor hidden-xs" href="#Pair-end-in-developing" title="Pair-end-in-developing"><span class="octicon octicon-link"></span></a>Pair-end<a target="_blank" rel="noopener"></a> (in developing)</h3><details><summary>If you have one replica per condition (control, test, untreatment, treatment, etc.). Then you should to build a dataset pair and use it as input in workflow.</summary>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/dataset_pair.png"><br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/dataset_pair2.png"><br>
+</details><details><summary>If you have several replicas per condition then create a list of dataset pairs and use it as input.</summary>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/list_dataset_pair.png"><br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/list_dataset2.png"><br>
+</details><h2 id="Description-of-workflows-"><a class="anchor hidden-xs" href="#Description-of-workflows-" title="Description-of-workflows-"><span class="octicon octicon-link"></span></a>Description of workflows <a target="_blank" rel="noopener"></a></h2><p><img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/wf_strategy.png" alt="wf_strategies"><br>
+Some described here workflows will be produced <strong>in 3 forms: full single-end, full pair-end and short.</strong> First two include alignment fastq files on the reference genome, filtering by reads quality and removing duplication read. The last one works with bam files, it means that all necessary pre-processing you do on your own.</p><p>When you will be on the pre-running page and had to choose inputs datasets, you will see <strong>“control”</strong> and <strong>“test”</strong> inputs. <strong>Control</strong> is dataset collection with samples in some normal condition (untreated, wildtype, health, etc.). <strong>Test</strong> is dataset collection in some condition which you want to compare with control (treatment, mutation, cancer, etc.).</p><p>You can test some of discribed workflows (short single-end) on <a href="https://drive.google.com/open?id=1wKhRFAkPGR0LLNR2jOH2dAHwql38kPLJ" target="_blank" rel="noopener">example data from RNA Informatics Training day 2019</a> or try to follow the instructions and do the exercices. In this folder you will find Tutorial, two dataset collection and a set of the workflows.</p><p><strong>For running the workflows you need to have:</strong></p><ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Reference genome <em>(ncRNA annotation, full versions of ncRNA analysis)</em></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Infernal annotation <em>(ncRNA annotation, Infernal workflow)</em></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>RNA-seq data (in FASTQ format for Full versions and BAM for short)</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Sequences of more related species from RNAcentral <em>(ncRNA annotation, RNAcentral workflow)</em></li>
+</ul><h3 id="Pre-processing-steps-only-for-full-versions-of-workflow-"><a class="anchor hidden-xs" href="#Pre-processing-steps-only-for-full-versions-of-workflow-" title="Pre-processing-steps-only-for-full-versions-of-workflow-"><span class="octicon octicon-link"></span></a>Pre-processing steps (only for full versions of workflow) <a target="_blank" rel="noopener"></a></h3><ol>
+<li><a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/" target="_blank" rel="noopener">FASTQC</a> - quality conrol<br>
+Inputs: fastq files<br>
+Additional inputs: Contaminant list, Adapter list, Submodule and Limit specifing file<details><summary>Outputs - txt and HTML files with:</summary><ul> 
+<li>Basic Statistics</li>
+<li>Per base sequence quality</li>
+<li>Per sequence quality scores</li>
+<li>Per base sequence content</li>
+<li>Per base GC content</li>
+<li>Per sequence GC content</li>
+<li>Per base N content</li>
+<li>Sequence Length Distribution</li>
+<li>Sequence Duplication Levels</li>
+<li>Overrepresented sequences</li>
+<li>Kmer Content</li></ul>
+</details></li>
+</ol><br><ol start="2">
+<li>
+<p><a href="http://ccb.jhu.edu/software/hisat/index.shtml" target="_blank" rel="noopener">HISAT2</a> <a target="_blank" rel="noopener"></a> - alignment on reference genome</p>
+<p>Inputs: fastq files and reference genome<br>
+Outputs: bam files and alignment statistics</p>
+</li>
+</ol><details><summary>Notes:<br>   
+    <ul>
+    <li>You <b>can not</b> change the parameter 'single or paired library', this is why exist two versions of workflow - 'full single-end' and 'full pair-end'. Check that you chose right workflow.</li>
+    <li>Change strand-specificity if it is necessary (by default - <b>unstranded</b>). You also have options <b>stranded forward</b> (read corresponds to a transcript) and <b>stranded reverse</b> (read corresponds to the reverse complemented counterpart of a transcript).  </li>
+    <li><b>You also will need to check the strand-specificity on these <a href="#featurecount">step</a>
+.</b></li></ul></summary>  
+<p><img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/hisat2.png"><br></p>
+</details><ol start="3">
+<li>
+<p>Filter BAM files by the quality of alignment<br>
+Inputs: BAM files from HISAT2</p>
+<details><summary>Parameters: by default mapping quality must be &gt;=10, but you can change the threshold.</summary><br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/quality_filter.png"><br>
+</details><br>
+Outputs: filtered BAM file
+</li>
+<li>
+<p>Remove duplicates (RmDup)<br>
+Remove potential PCR duplicates: if multiple read pairs have identical external coordinates, only retain the pair with the highest mapping quality. <strong>(NOTE when you will create wf for pair-end check this tool!!)</strong></p>
+</li>
+</ol><h3 id="Main-workflow-"><a class="anchor hidden-xs" href="#Main-workflow-" title="Main-workflow-"><span class="octicon octicon-link"></span></a>Main workflow <a target="_blank" rel="noopener"></a></h3><p>The main workflow builds from two parts and combines inside all steps from RNAcentral and Infernal workflows. But if you want to use only one of the methods, you will find the instructions <a href="#infernalwf">below</a>.
+<br>
+<br></p><h4 id="ncRNA-annotation"><a class="anchor hidden-xs" href="#ncRNA-annotation" title="ncRNA-annotation"><span class="octicon octicon-link"></span></a><span style="color:green">ncRNA annotation</span></h4><a target="_blank" rel="noopener"></a><h1 id="tip1"><a class="anchor hidden-xs" href="#tip1" title="tip1"><span class="octicon octicon-link"></span></a></h1><p>Link: <a href="https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/ncRNA%20annotation" target="_blank" rel="noopener">https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/ncRNA%20annotation</a></p><p>This workflow extracts annotation from the alignment of RNAcentral alignment and adds it to Infernal annotation.</p><p><img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/ncrna_annotation2.png" alt="ncrna_annotation"></p><p>Inputs:</p><ol>
+<li>Fasta file with sequences (more related to model organism species)</li>
+<li>Reference genome</li>
+<li>Infernal annotation</li>
+</ol><p>Main steps include:</p><ul>
+<li>Align RNAcentral sequences on reference genome using HISAT2</li>
+<li>Filter by alignment quality</li>
+<li>Transform BAM to GFF</li>
+<li>Combine RNAcentral annotation with Infernal</li>
+</ul><p>Output - ncRNA annotation in GFF format from Infernal and RNAcentral <br></p><table>
+<thead>
+<tr>
+<th>seqname</th>
+<th>source</th>
+<th>feature</th>
+<th>start</th>
+<th>end</th>
+<th>score*</th>
+<th>strand</th>
+<th>frame</th>
+<th>group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chr_1</td>
+<td>Infernal</td>
+<td>rna</td>
+<td>22526323</td>
+<td>22526440</td>
+<td>100</td>
+<td>+</td>
+<td>.</td>
+<td>ID=RF01943_mir-999_22526323_22526440</td>
+</tr>
+<tr>
+<td>chr_1</td>
+<td>Infernal</td>
+<td>rna</td>
+<td>10000379</td>
+<td>10000542</td>
+<td>50</td>
+<td>+</td>
+<td>.</td>
+<td>ID=RF00003_U1_10000379_10000542</td>
+</tr>
+<tr>
+<td>chr_1</td>
+<td>RNAcentral</td>
+<td>rna</td>
+<td>7010611</td>
+<td>7010633</td>
+<td>50</td>
+<td>+</td>
+<td>.</td>
+<td>ID=URS0000AC4252</td>
+</tr>
+</tbody>
+</table><br><p>* Score depend on overlapping between databases. ncRNA has score 100 if it was found by both approach (Infernal and RNAcentral), and 50 if it was found only by one method.
+<br>
+<br></p><h4 id="-ncRNA-analysis"><a class="anchor hidden-xs" href="#-ncRNA-analysis" title="-ncRNA-analysis"><span class="octicon octicon-link"></span></a> <span style="color:green"> ncRNA analysis</span></h4><a target="_blank" rel="noopener"></a><h1 id="tip2"><a class="anchor hidden-xs" href="#tip2" title="tip2"><span class="octicon octicon-link"></span></a></h1><p>Full single-end: <a href="https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/ncRNA%20analysis%20full%20single-end" target="_blank" rel="noopener">https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/ncRNA%20analysis%20full%20single-end</a>  <br></p><p>Full pair-end (in developing): <a href="https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/ncRNA%20analysis%20full%20pair-end" target="_blank" rel="noopener">https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/ncRNA%20analysis%20full%20pair-end</a> <br></p><p>Short: <a href="https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/ncRNA%20analysis%20short" target="_blank" rel="noopener">https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/ncRNA%20analysis%20short</a> <br></p><p>Workflow “ncRNA analysis” includes reads count, their normalization and hypothesis test for differential expression analysis.</p><p><img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/ncrna_workflow.png" alt="ncrna_workflow"></p><p>Inputs:</p><ol>
+<li>Reference genome <em>(only for full version)</em></li>
+<li>ncRNA annotation obtained from “ncRNA annotation” workflow. It also could be Your annotation followed <a href="#gff_req">GFF format requirement</a>.</li>
+<li>BAM files prepared by instructions from <a href="#prepare_data">“Prepare your data carefully”</a></li>
+</ol><p>Main steps include:</p><ul>
+<li><a href="https://academic.oup.com/bioinformatics/article/30/7/923/232889" target="_blank" rel="noopener">featureCount</a> <a target="_blank" rel="noopener"></a><br>
+Measure gene expression in RNA-Seq experiments from SAM or BAM files.<br>
+On this step you should to check <strong>strand information</strong> (default - unstranded), possible variants - stranded forward or reverse.<br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/featurecount1.png" alt="featurecount1"></li>
+</ul><p>Also, here you can change settings for GFF file. For example, you have gff file like this:</p><table>
+<thead>
+<tr>
+<th>seqname</th>
+<th>source</th>
+<th>feature</th>
+<th>start</th>
+<th>end</th>
+<th>score</th>
+<th>strand</th>
+<th>frame</th>
+<th>group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chr2</td>
+<td>tool_name</td>
+<td>exon</td>
+<td>8048631</td>
+<td>8048808</td>
+<td>.</td>
+<td>-</td>
+<td>.</td>
+<td>name=www</td>
+</tr>
+<tr>
+<td>chr2</td>
+<td>tool_name</td>
+<td>CDS</td>
+<td>5968293</td>
+<td>5968429</td>
+<td>.</td>
+<td>-</td>
+<td>.</td>
+<td>name=xxx</td>
+</tr>
+<tr>
+<td>chr2</td>
+<td>tool_name</td>
+<td>ncRNA</td>
+<td>20063751</td>
+<td>20063890</td>
+<td>.</td>
+<td>+</td>
+<td>.</td>
+<td>name=zzz</td>
+</tr>
+</tbody>
+</table><p>If you are interested only in ncRNA, then put in “GFF feature type filter” - ‘ncRNA’ and change “GFF gene identifier” to ‘name’.<br>
+<img src="https://github.com/artagmaz/ncRNA-workflow/blob/master/photos/featurecount2.png" alt="featureCount"></p><ul>
+<li><a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8" target="_blank" rel="noopener">DESeq2</a><br>
+Determines differentially expressed features from count tables.</li>
+</ul><p>Outputs:</p><ol>
+<li>Table with reads counts for all samples</li>
+<li>DESeq2 normalized table</li>
+<li>Filtered by adjusted p-value (&lt;=0.05) DESeq2 result table with statistical values</li>
+</ol><table>
+<thead>
+<tr>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Gene Identifiers</td>
+<td style="text-align:center">mean normalized counts</td>
+<td style="text-align:center">the logarithm (to basis 2) of the fold change</td>
+<td style="text-align:center">standard error estimate for the log2 fold change estimate</td>
+<td style="text-align:center">Wald statistic</td>
+<td style="text-align:center">p-value for the statistical significance of this change</td>
+<td style="text-align:center">p-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate (FDR)</td>
+</tr>
+</tbody>
+</table><ol start="4">
+<li>DESeq2 plots (PCA, sample-to-sample distances, dispersion estimates, Histogram of p−values, MA-plot)</li>
+<li>Table output for Rstudio script and plots creating (this part of the workflow in the development stage)</li>
+</ol><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>RC Sample 1</th>
+<th>RC Sample 2</th>
+<th>…</th>
+<th>RC Sample n</th>
+<th>NRC Sample 1</th>
+<th>NRC Sample 2</th>
+<th>…</th>
+<th>NRC Sample n</th>
+<th>Base mean*</th>
+<th>log2(FC)*</th>
+<th>StdErr*</th>
+<th>Wald-Stats*</th>
+<th>P-value*</th>
+<th>P-adj*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table><p>RC - read counts <br>
+NRC - normalized read count <br>
+*- statistics values from DESeq2 result table</p><h3 id="Infernal-only-"><a class="anchor hidden-xs" href="#Infernal-only-" title="Infernal-only-"><span class="octicon octicon-link"></span></a>Infernal only <a target="_blank" rel="noopener"></a></h3><p>If you want use only Infernal method, then use <a href="#ncrna_wf">“ncRNA analysis”</a> with annotation from Infernal (<em>without using “ncRNA annotation”</em>).</p><h3 id="RNAcentral-only-"><a class="anchor hidden-xs" href="#RNAcentral-only-" title="RNAcentral-only-"><span class="octicon octicon-link"></span></a>RNAcentral only <a target="_blank" rel="noopener"></a></h3><p>Link:<a href="https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/RNAcentral%20only" target="_blank" rel="noopener">https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/RNAcentral%20only</a><br>
+If you want to use only RNAcentral method, then download the workflow by link and use the obtained annotation in <a href="#ncrna_wf">“ncRNA analysis”</a>. The difference with “ncRNA annotation” is in absent of union with Infernal annotation.</p><h3 id="Read-count-only-"><a class="anchor hidden-xs" href="#Read-count-only-" title="Read-count-only-"><span class="octicon octicon-link"></span></a>Read count only <a target="_blank" rel="noopener"></a></h3><p>Link:<a href="https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/Count%20reads%20only" target="_blank" rel="noopener">https://github.com/artagmaz/ncRNA-workflow/tree/master/workflows/Count%20reads%20only</a><br>
+If you want obtain only read counts and do next steps on your own. You can use this workflow.<br>
+Input:</p><ol>
+<li>Fastq files</li>
+<li>Reference genome</li>
+<li>Annotation</li>
+</ol><p>Output - table with reads counts</p><p><strong>Notes: </strong></p><ul><strong> <li>You can run workflow with multiple input.</li><li>Don’t forget check strand-specficity in HISAT2 anf featureCount settings.</li></strong></ul><p></p><h2 id="Check-list-before-run-"><a class="anchor hidden-xs" href="#Check-list-before-run-" title="Check-list-before-run-"><span class="octicon octicon-link"></span></a>Check list before run: <a target="_blank" rel="noopener"></a></h2><ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Prepared your data correctly</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Chose workflow corresponding to type of you input data</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Chose right strand-specificity on <a href="#hisat2">pre-processing step</a> and <a href="#featurecount">inside workflow</a></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Have GFF annotation followed the <a href="#gff_req">requirements</a> or make <a href="#featurecount">necessary changes</a></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>If you have splitting data on control and test in the workflow and make changes in some processes, repeat it for <strong>both</strong> (control and test dataset)</li>
+</ul><h1 id="Mistake-discussion-"><a class="anchor hidden-xs" href="#Mistake-discussion-" title="Mistake-discussion-"><span class="octicon octicon-link"></span></a>Mistake discussion <a target="_blank" rel="noopener"></a></h1><ol>
+<li></li>
+</ol><p><strong>If you have any questions or problems, contact us <em>(…contact info…)</em></strong></p></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li><a href="#Explore-non-coding-RNA-using-Rfam-RNAcentral-and-Galaxy-workflows" title="Explore non-coding RNA using Rfam, RNAcentral and Galaxy workflows!">Explore non-coding RNA using Rfam, RNAcentral and Galaxy workflows!</a></li>
+<li><a href="#tip1" title=""></a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#Notes-and-advice-" title="Notes and advice ">Notes and advice </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#The-most-usefull-links-in-one-place-" title="The most usefull links in one place: ">The most usefull links in one place: </a></li>
+<li><a href="#Let’s-talk-about" title="Let’s talk about:">Let’s talk about:</a><ul class="nav">
+<li><a href="#What-is-Galaxy-and-workflow-" title="What is Galaxy and workflow? ">What is Galaxy and workflow? </a><ul class="nav">
+<li><a href="#How-to-use-workflows-" title="How to use workflows ">How to use workflows </a></li>
+<li><a href="#How-to-change-parameters-in-the-workflow" title="How to change parameters in the workflow?">How to change parameters in the workflow?</a></li>
+</ul>
+</li>
+<li><a href="#What-tools-we-used-in-advanced-" title="What tools we used in advanced ">What tools we used in advanced </a><ul class="nav">
+<li><a href="#Infernal-" title="Infernal ">Infernal </a></li>
+<li><a href="#Format-transformation-" title="Format transformation ">Format transformation </a></li>
+<li><a href="#GFF-format-requirement-" title="GFF format requirement ">GFF format requirement </a></li>
+</ul>
+</li>
+<li><a href="#Login-in-galaxy-and-upload-your-data-" title="Login in galaxy and upload your data ">Login in galaxy and upload your data </a></li>
+<li><a href="#Prepare-your-data-carefully-" title="Prepare your data carefully ">Prepare your data carefully </a><ul class="nav">
+<li><a href="#If-you-have-more-than-one-fastq-file-per-sample-" title="If you have more than one fastq file per sample ">If you have more than one fastq file per sample </a></li>
+<li><a href="#Single-end" title="Single-end">Single-end</a></li>
+<li><a href="#Pair-end-in-developing" title="Pair-end (in developing)">Pair-end (in developing)</a></li>
+</ul>
+</li>
+<li><a href="#Description-of-workflows-" title="Description of workflows ">Description of workflows </a><ul class="nav">
+<li><a href="#Pre-processing-steps-only-for-full-versions-of-workflow-" title="Pre-processing steps (only for full versions of workflow) ">Pre-processing steps (only for full versions of workflow) </a></li>
+<li><a href="#Main-workflow-" title="Main workflow ">Main workflow </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#tip1" title=""></a></li>
+<li><a href="#tip2" title=""></a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#Infernal-only-" title="Infernal only ">Infernal only </a></li>
+<li><a href="#RNAcentral-only-" title="RNAcentral only ">RNAcentral only </a></li>
+<li><a href="#Read-count-only-" title="Read count only ">Read count only </a></li>
+</ul>
+</li>
+<li><a href="#Check-list-before-run-" title="Check list before run: ">Check list before run: </a></li>
+</ul>
+</li>
+<li><a href="#Mistake-discussion-" title="Mistake discussion ">Mistake discussion </a></li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li><a href="#Explore-non-coding-RNA-using-Rfam-RNAcentral-and-Galaxy-workflows" title="Explore non-coding RNA using Rfam, RNAcentral and Galaxy workflows!">Explore non-coding RNA using Rfam, RNAcentral and Galaxy workflows!</a></li>
+<li><a href="#tip1" title=""></a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#Notes-and-advice-" title="Notes and advice ">Notes and advice </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#The-most-usefull-links-in-one-place-" title="The most usefull links in one place: ">The most usefull links in one place: </a></li>
+<li><a href="#Let’s-talk-about" title="Let’s talk about:">Let’s talk about:</a><ul class="nav">
+<li><a href="#What-is-Galaxy-and-workflow-" title="What is Galaxy and workflow? ">What is Galaxy and workflow? </a><ul class="nav">
+<li><a href="#How-to-use-workflows-" title="How to use workflows ">How to use workflows </a></li>
+<li><a href="#How-to-change-parameters-in-the-workflow" title="How to change parameters in the workflow?">How to change parameters in the workflow?</a></li>
+</ul>
+</li>
+<li><a href="#What-tools-we-used-in-advanced-" title="What tools we used in advanced ">What tools we used in advanced </a><ul class="nav">
+<li><a href="#Infernal-" title="Infernal ">Infernal </a></li>
+<li><a href="#Format-transformation-" title="Format transformation ">Format transformation </a></li>
+<li><a href="#GFF-format-requirement-" title="GFF format requirement ">GFF format requirement </a></li>
+</ul>
+</li>
+<li><a href="#Login-in-galaxy-and-upload-your-data-" title="Login in galaxy and upload your data ">Login in galaxy and upload your data </a></li>
+<li><a href="#Prepare-your-data-carefully-" title="Prepare your data carefully ">Prepare your data carefully </a><ul class="nav">
+<li><a href="#If-you-have-more-than-one-fastq-file-per-sample-" title="If you have more than one fastq file per sample ">If you have more than one fastq file per sample </a></li>
+<li><a href="#Single-end" title="Single-end">Single-end</a></li>
+<li><a href="#Pair-end-in-developing" title="Pair-end (in developing)">Pair-end (in developing)</a></li>
+</ul>
+</li>
+<li><a href="#Description-of-workflows-" title="Description of workflows ">Description of workflows </a><ul class="nav">
+<li><a href="#Pre-processing-steps-only-for-full-versions-of-workflow-" title="Pre-processing steps (only for full versions of workflow) ">Pre-processing steps (only for full versions of workflow) </a></li>
+<li><a href="#Main-workflow-" title="Main workflow ">Main workflow </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#tip1" title=""></a></li>
+<li><a href="#tip2" title=""></a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#Infernal-only-" title="Infernal only ">Infernal only </a></li>
+<li><a href="#RNAcentral-only-" title="RNAcentral only ">RNAcentral only </a></li>
+<li><a href="#Read-count-only-" title="Read count only ">Read count only </a></li>
+</ul>
+</li>
+<li><a href="#Check-list-before-run-" title="Check list before run: ">Check list before run: </a></li>
+</ul>
+</li>
+<li><a href="#Mistake-discussion-" title="Mistake discussion ">Mistake discussion </a></li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
